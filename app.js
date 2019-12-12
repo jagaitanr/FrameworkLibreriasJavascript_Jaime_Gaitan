@@ -146,7 +146,6 @@ $('.btn-reinicio').click(function(){
   if (textoBoton=='Iniciar'){
       $('.btn-reinicio').html('reiniciar');
       activarArrastre(); // función que activará todos los dulces para poderlos arrastrar
-       console.log('se activo bloque');
       correrTimer = true;
     }
     else
@@ -180,7 +179,7 @@ if (flasheo == 7){
         $('#score-text').html(puntos);
 
       //console.log('i= '+i);
-      //console.log('Cambio imagen Fila 0'+aleatorio);
+      console.log('Cambio imagen Fila 0'+aleatorio);
     }
     }
     }
@@ -513,8 +512,9 @@ function animacionCeldasIguales()
 
 
 
-function revisarTablero()
-  {
+//function revisarTablero()
+function revisarTablero(x1,x2,y1,y2)
+  { console.log('entro a revisar tablero: '+x1+x2+y1+y2);
     var temporal='-'; //valor temporal para ir cambiando los que sean iguales
     var aleatorio = 0;
 
@@ -587,10 +587,19 @@ for (i=0; i<=76; i++)
   celdasTotales=celdasTotales + celdasIguales[i];
 }
 //animacionCeldasIguales(); //animación de las celdas que son iguales
+console.log(celdasTotales);
 if (celdasTotales>0)
   {bloquearPorAnimacion=true;}
 else {
+
   bloquearPorAnimacion=false;
+
+  ruta = $('.col-'+x1).children()[x2].src.substr(-11,11);// almacenamos en ruta la imagen de
+  y = $('.col-'+y1).children()[y2].src.substr(-11,11);
+  $('.col-'+x1).children()[x2].src= y;
+  $('.col-'+y1).children()[y2].src= ruta;
+
+
   }
 
 } //fin función revision tablero
@@ -610,7 +619,7 @@ function activarDroppables(x,y)
       $('.col-2').children()[0].src= y;
       $('.col-1').children()[0].src= ruta;
       movimiento=movimiento+1; //incrementar un movimiento
-      revisarTablero(); }}); //revisar si hay otro trio
+      revisarTablero(2,0,1,0); }}); //revisar si hay otro trio
 
       $('.dulce11').droppable({accept: '.dulce10',
       drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -618,7 +627,7 @@ function activarDroppables(x,y)
       $('.col-1').children()[1].src= y;
       $('.col-1').children()[0].src= ruta;
       movimiento=movimiento+1; //incrementar un movimiento
-      revisarTablero(); }}); //revisar si hay otro trio
+      revisarTablero(1,1,1,0); }}); //revisar si hay otro trio
 
      break;
 
@@ -630,7 +639,7 @@ function activarDroppables(x,y)
        $('.col-1').children()[0].src= y;
        $('.col-1').children()[1].src= ruta;
        movimiento=movimiento+1; //incrementar un movimiento
-       revisarTablero(); }}); //revisar si hay otro trio
+       revisarTablero(1,0,1,1); }}); //revisar si hay otro trio
 
        $('.dulce12').droppable({accept: '.dulce11',
        drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -638,7 +647,7 @@ function activarDroppables(x,y)
        $('.col-1').children()[2].src= y;
        $('.col-1').children()[1].src= ruta;
        movimiento=movimiento+1; //incrementar un movimiento
-       revisarTablero(); }}); //revisar si hay otro trio
+       revisarTablero(1,2,1,1); }}); //revisar si hay otro trio
 
        $('.dulce21').droppable({accept: '.dulce11',
        drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -646,7 +655,7 @@ function activarDroppables(x,y)
        $('.col-2').children()[1].src= y;
        $('.col-1').children()[1].src= ruta;
        movimiento=movimiento+1; //incrementar un movimiento
-       revisarTablero(); }}); //revisar si hay otro trio
+       revisarTablero(2,1,1,1); }}); //revisar si hay otro trio
 
       break;
 
@@ -658,7 +667,7 @@ function activarDroppables(x,y)
         $('.col-1').children()[1].src= y;
         $('.col-1').children()[2].src= ruta;
         movimiento=movimiento+1; //incrementar un movimiento
-        revisarTablero(); }}); //revisar si hay otro trio
+        revisarTablero(1,1,1,2); }}); //revisar si hay otro trio
 
         $('.dulce13').droppable({accept: '.dulce12',
         drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -666,7 +675,7 @@ function activarDroppables(x,y)
         $('.col-1').children()[3].src= y;
         $('.col-1').children()[2].src= ruta;
         movimiento=movimiento+1; //incrementar un movimiento
-        revisarTablero(); }}); //revisar si hay otro trio
+        revisarTablero(1,3,1,2); }}); //revisar si hay otro trio
 
         $('.dulce22').droppable({accept: '.dulce12',
         drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -674,7 +683,7 @@ function activarDroppables(x,y)
         $('.col-2').children()[2].src= y;
         $('.col-1').children()[2].src= ruta;
         movimiento=movimiento+1; //incrementar un movimiento
-        revisarTablero(); }}); //revisar si hay otro trio
+        revisarTablero(2,2,1,2); }}); //revisar si hay otro trio
 
 
        break;
@@ -687,7 +696,7 @@ function activarDroppables(x,y)
          $('.col-1').children()[2].src= y;
          $('.col-1').children()[3].src= ruta;
          movimiento=movimiento+1; //incrementar un movimiento
-         revisarTablero(); }}); //revisar si hay otro trio
+         revisarTablero(1,2,1,3); }}); //revisar si hay otro trio
 
          $('.dulce14').droppable({accept: '.dulce13',
          drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -695,7 +704,7 @@ function activarDroppables(x,y)
          $('.col-1').children()[4].src= y;
          $('.col-1').children()[3].src= ruta;
          movimiento=movimiento+1; //incrementar un movimiento
-         revisarTablero(); }}); //revisar si hay otro trio
+         revisarTablero(1,4,1,3); }}); //revisar si hay otro trio
 
          $('.dulce23').droppable({accept: '.dulce13',
          drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -703,7 +712,7 @@ function activarDroppables(x,y)
          $('.col-2').children()[3].src= y;
          $('.col-1').children()[3].src= ruta;
          movimiento=movimiento+1; //incrementar un movimiento
-         revisarTablero(); }}); //revisar si hay otro trio
+         revisarTablero(2,3,1,3); }}); //revisar si hay otro trio
 
        break;
 
@@ -715,7 +724,7 @@ function activarDroppables(x,y)
           $('.col-1').children()[3].src= y;
           $('.col-1').children()[4].src= ruta;
           movimiento=movimiento+1; //incrementar un movimiento
-          revisarTablero(); }}); //revisar si hay otro trio
+          revisarTablero(1,3,1,4); }}); //revisar si hay otro trio
 
           $('.dulce15').droppable({accept: '.dulce14',
           drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -723,7 +732,7 @@ function activarDroppables(x,y)
           $('.col-1').children()[5].src= y;
           $('.col-1').children()[4].src= ruta;
           movimiento=movimiento+1; //incrementar un movimiento
-          revisarTablero(); }}); //revisar si hay otro trio
+          revisarTablero(1,5,1,4); }}); //revisar si hay otro trio
 
           $('.dulce24').droppable({accept: '.dulce14',
           drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -731,7 +740,7 @@ function activarDroppables(x,y)
           $('.col-2').children()[4].src= y;
           $('.col-1').children()[4].src= ruta;
           movimiento=movimiento+1; //incrementar un movimiento
-          revisarTablero(); }}); //revisar si hay otro trio
+          revisarTablero(2,4,1,4); }}); //revisar si hay otro trio
 
          break;
 
@@ -743,7 +752,7 @@ function activarDroppables(x,y)
            $('.col-1').children()[4].src= y;
            $('.col-1').children()[5].src= ruta;
            movimiento=movimiento+1; //incrementar un movimiento
-           revisarTablero(); }}); //revisar si hay otro trio
+           revisarTablero(1,4,1,5); }}); //revisar si hay otro trio
 
            $('.dulce16').droppable({accept: '.dulce15',
            drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -751,7 +760,7 @@ function activarDroppables(x,y)
            $('.col-1').children()[6].src= y;
            $('.col-1').children()[5].src= ruta;
            movimiento=movimiento+1; //incrementar un movimiento
-           revisarTablero(); }}); //revisar si hay otro trio
+           revisarTablero(1,6,1,5); }}); //revisar si hay otro trio
 
            $('.dulce25').droppable({accept: '.dulce15',
            drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -759,7 +768,7 @@ function activarDroppables(x,y)
            $('.col-2').children()[5].src= y;
            $('.col-1').children()[5].src= ruta;
            movimiento=movimiento+1; //incrementar un movimiento
-           revisarTablero(); }}); //revisar si hay otro trio
+           revisarTablero(2,5,1,5); }}); //revisar si hay otro trio
 
           break;
 
@@ -770,7 +779,7 @@ function activarDroppables(x,y)
             $('.col-1').children()[5].src= y;
             $('.col-1').children()[6].src= ruta;
             movimiento=movimiento+1; //incrementar un movimiento
-            revisarTablero(); }}); //revisar si hay otro trio
+            revisarTablero(1,5,1,6); }}); //revisar si hay otro trio
 
 
             $('.dulce26').droppable({accept: '.dulce16',
@@ -779,7 +788,7 @@ function activarDroppables(x,y)
             $('.col-2').children()[6].src= y;
             $('.col-1').children()[6].src= ruta;
             movimiento=movimiento+1; //incrementar un movimiento
-            revisarTablero(); }}); //revisar si hay otro trio
+            revisarTablero(2,6,1,6); }}); //revisar si hay otro trio
 
            break;
 
@@ -794,7 +803,7 @@ function activarDroppables(x,y)
              $('.col-3').children()[0].src= y;
              $('.col-2').children()[0].src= ruta;
              movimiento=movimiento+1; //incrementar un movimiento
-             revisarTablero(); }}); //revisar si hay otro trio
+             revisarTablero(3,0,2,0); }}); //revisar si hay otro trio
 
              $('.dulce21').droppable({accept: '.dulce20',
              drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -802,15 +811,15 @@ function activarDroppables(x,y)
              $('.col-2').children()[1].src= y;
              $('.col-2').children()[0].src= ruta;
              movimiento=movimiento+1; //incrementar un movimiento
-             revisarTablero(); }}); //revisar si hay otro trio
+             revisarTablero(2,1,2,0); }}); //revisar si hay otro trio
 
              $('.dulce10').droppable({accept: '.dulce20',
              drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
              ruta = $('.col-1').children()[0].src.substr(-11,11);// almacenamos en ruta la imagen de
-             $('.col-1').children()[2].src= y;
+             $('.col-1').children()[0].src= y;
              $('.col-2').children()[0].src= ruta;
              movimiento=movimiento+1; //incrementar un movimiento
-             revisarTablero(); }}); //revisar si hay otro trio
+             revisarTablero(1,0,2,0); }}); //revisar si hay otro trio
 
             break;
 
@@ -822,7 +831,7 @@ function activarDroppables(x,y)
               $('.col-2').children()[0].src= y;
               $('.col-2').children()[1].src= ruta;
               movimiento=movimiento+1; //incrementar un movimiento
-              revisarTablero(); }}); //revisar si hay otro trio
+              revisarTablero(2,0,2,1); }}); //revisar si hay otro trio
 
               $('.dulce22').droppable({accept: '.dulce21',
               drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -830,7 +839,7 @@ function activarDroppables(x,y)
               $('.col-2').children()[2].src= y;
               $('.col-2').children()[1].src= ruta;
               movimiento=movimiento+1; //incrementar un movimiento
-              revisarTablero(); }}); //revisar si hay otro trio
+              revisarTablero(2,2,2,1); }}); //revisar si hay otro trio
 
               $('.dulce31').droppable({accept: '.dulce21',
               drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -838,7 +847,7 @@ function activarDroppables(x,y)
               $('.col-3').children()[1].src= y;
               $('.col-2').children()[1].src= ruta;
               movimiento=movimiento+1; //incrementar un movimiento
-              revisarTablero(); }}); //revisar si hay otro trio
+              revisarTablero(3,1,2,1); }}); //revisar si hay otro trio
 
               $('.dulce11').droppable({accept: '.dulce21',
               drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -846,7 +855,7 @@ function activarDroppables(x,y)
               $('.col-1').children()[1].src= y;
               $('.col-2').children()[1].src= ruta;
               movimiento=movimiento+1; //incrementar un movimiento
-              revisarTablero(); }}); //revisar si hay otro trio
+              revisarTablero(1,1,2,1); }}); //revisar si hay otro trio
 
              break;
 
@@ -858,7 +867,7 @@ function activarDroppables(x,y)
                $('.col-2').children()[1].src= y;
                $('.col-2').children()[2].src= ruta;
                movimiento=movimiento+1; //incrementar un movimiento
-               revisarTablero(); }}); //revisar si hay otro trio
+               revisarTablero(2,1,2,2); }}); //revisar si hay otro trio
 
                $('.dulce23').droppable({accept: '.dulce22',
                drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -866,7 +875,7 @@ function activarDroppables(x,y)
                $('.col-2').children()[3].src= y;
                $('.col-2').children()[2].src= ruta;
                movimiento=movimiento+1; //incrementar un movimiento
-               revisarTablero(); }}); //revisar si hay otro trio
+               revisarTablero(2,3,2,2); }}); //revisar si hay otro trio
 
                $('.dulce32').droppable({accept: '.dulce22',
                drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -874,7 +883,7 @@ function activarDroppables(x,y)
                $('.col-3').children()[2].src= y;
                $('.col-2').children()[2].src= ruta;
                movimiento=movimiento+1; //incrementar un movimiento
-               revisarTablero(); }}); //revisar si hay otro trio
+               revisarTablero(3,2,2,2); }}); //revisar si hay otro trio
 
                $('.dulce12').droppable({accept: '.dulce22',
                drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -882,7 +891,7 @@ function activarDroppables(x,y)
                $('.col-1').children()[2].src= y;
                $('.col-2').children()[2].src= ruta;
                movimiento=movimiento+1; //incrementar un movimiento
-               revisarTablero(); }}); //revisar si hay otro trio
+               revisarTablero(1,2,2,2); }}); //revisar si hay otro trio
 
               break;
 
@@ -894,7 +903,7 @@ function activarDroppables(x,y)
                 $('.col-2').children()[2].src= y;
                 $('.col-2').children()[3].src= ruta;
                 movimiento=movimiento+1; //incrementar un movimiento
-                revisarTablero(); }}); //revisar si hay otro trio
+                revisarTablero(2,2,2,3); }}); //revisar si hay otro trio
 
                 $('.dulce24').droppable({accept: '.dulce23',
                 drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -902,7 +911,7 @@ function activarDroppables(x,y)
                 $('.col-2').children()[4].src= y;
                 $('.col-2').children()[3].src= ruta;
                 movimiento=movimiento+1; //incrementar un movimiento
-                revisarTablero(); }}); //revisar si hay otro trio
+                revisarTablero(2,4,2,3); }}); //revisar si hay otro trio
 
                 $('.dulce33').droppable({accept: '.dulce23',
                 drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -910,7 +919,7 @@ function activarDroppables(x,y)
                 $('.col-3').children()[3].src= y;
                 $('.col-3').children()[3].src= ruta;
                 movimiento=movimiento+1; //incrementar un movimiento
-                revisarTablero(); }}); //revisar si hay otro trio
+                revisarTablero(3,3,2,3); }}); //revisar si hay otro trio
 
                 $('.dulce13').droppable({accept: '.dulce23',
                 drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -918,7 +927,7 @@ function activarDroppables(x,y)
                 $('.col-1').children()[3].src= y;
                 $('.col-2').children()[3].src= ruta;
                 movimiento=movimiento+1; //incrementar un movimiento
-                revisarTablero(); }}); //revisar si hay otro trio
+                revisarTablero(1,3,2,3); }}); //revisar si hay otro trio
 
                 break;
 
@@ -930,7 +939,7 @@ function activarDroppables(x,y)
                  $('.col-2').children()[3].src= y;
                  $('.col-2').children()[4].src= ruta;
                  movimiento=movimiento+1; //incrementar un movimiento
-                 revisarTablero(); }}); //revisar si hay otro trio
+                 revisarTablero(2,3,2,4); }}); //revisar si hay otro trio
 
                  $('.dulce25').droppable({accept: '.dulce24',
                  drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -938,7 +947,7 @@ function activarDroppables(x,y)
                  $('.col-2').children()[5].src= y;
                  $('.col-2').children()[4].src= ruta;
                  movimiento=movimiento+1; //incrementar un movimiento
-                 revisarTablero(); }}); //revisar si hay otro trio
+                 revisarTablero(2,5,2,4); }}); //revisar si hay otro trio
 
                  $('.dulce34').droppable({accept: '.dulce24',
                  drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -946,7 +955,7 @@ function activarDroppables(x,y)
                  $('.col-3').children()[4].src= y;
                  $('.col-2').children()[4].src= ruta;
                  movimiento=movimiento+1; //incrementar un movimiento
-                 revisarTablero(); }}); //revisar si hay otro trio
+                 revisarTablero(3,4,2,4); }}); //revisar si hay otro trio
 
                  $('.dulce14').droppable({accept: '.dulce24',
                  drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -954,7 +963,7 @@ function activarDroppables(x,y)
                  $('.col-1').children()[4].src= y;
                  $('.col-2').children()[4].src= ruta;
                  movimiento=movimiento+1; //incrementar un movimiento
-                 revisarTablero(); }}); //revisar si hay otro trio
+                 revisarTablero(1,4,2,4); }}); //revisar si hay otro trio
 
                  break;
 
@@ -966,7 +975,7 @@ function activarDroppables(x,y)
                   $('.col-2').children()[4].src= y;
                   $('.col-2').children()[5].src= ruta;
                   movimiento=movimiento+1; //incrementar un movimiento
-                  revisarTablero(); }}); //revisar si hay otro trio
+                  revisarTablero(2,4,2,5); }}); //revisar si hay otro trio
 
                   $('.dulce26').droppable({accept: '.dulce25',
                   drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -974,7 +983,7 @@ function activarDroppables(x,y)
                   $('.col-2').children()[6].src= y;
                   $('.col-2').children()[5].src= ruta;
                   movimiento=movimiento+1; //incrementar un movimiento
-                  revisarTablero(); }}); //revisar si hay otro trio
+                  revisarTablero(2,6,2,5); }}); //revisar si hay otro trio
 
                   $('.dulce35').droppable({accept: '.dulce25',
                   drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -982,7 +991,7 @@ function activarDroppables(x,y)
                   $('.col-3').children()[5].src= y;
                   $('.col-2').children()[5].src= ruta;
                   movimiento=movimiento+1; //incrementar un movimiento
-                  revisarTablero(); }}); //revisar si hay otro trio
+                  revisarTablero(3,5,2,5); }}); //revisar si hay otro trio
 
                   $('.dulce15').droppable({accept: '.dulce25',
                   drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -990,7 +999,7 @@ function activarDroppables(x,y)
                   $('.col-1').children()[5].src= y;
                   $('.col-2').children()[5].src= ruta;
                   movimiento=movimiento+1; //incrementar un movimiento
-                  revisarTablero(); }}); //revisar si hay otro trio
+                  revisarTablero(1,5,2,5); }}); //revisar si hay otro trio
 
                  break;
 
@@ -1001,7 +1010,7 @@ function activarDroppables(x,y)
                    $('.col-2').children()[5].src= y;
                    $('.col-2').children()[6].src= ruta;
                    movimiento=movimiento+1; //incrementar un movimiento
-                   revisarTablero(); }}); //revisar si hay otro trio
+                   revisarTablero(2,5,2,6); }}); //revisar si hay otro trio
 
 
                    $('.dulce36').droppable({accept: '.dulce26',
@@ -1010,7 +1019,7 @@ function activarDroppables(x,y)
                    $('.col-3').children()[6].src= y;
                    $('.col-2').children()[6].src= ruta;
                    movimiento=movimiento+1; //incrementar un movimiento
-                   revisarTablero(); }}); //revisar si hay otro trio
+                   revisarTablero(3,6,2,6); }}); //revisar si hay otro trio
 
                    $('.dulce16').droppable({accept: '.dulce26',
                    drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1018,7 +1027,7 @@ function activarDroppables(x,y)
                    $('.col-1').children()[6].src= y;
                    $('.col-2').children()[6].src= ruta;
                    movimiento=movimiento+1; //incrementar un movimiento
-                   revisarTablero(); }}); //revisar si hay otro trio
+                   revisarTablero(1,6,2,6); }}); //revisar si hay otro trio
 
                   break;
 
@@ -1029,7 +1038,7 @@ function activarDroppables(x,y)
                     $('.col-4').children()[0].src= y;
                     $('.col-3').children()[0].src= ruta;
                     movimiento=movimiento+1; //incrementar un movimiento
-                    revisarTablero(); }}); //revisar si hay otro trio
+                    revisarTablero(4,0,3,0); }}); //revisar si hay otro trio
 
                     $('.dulce31').droppable({accept: '.dulce30',
                     drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1037,7 +1046,7 @@ function activarDroppables(x,y)
                     $('.col-3').children()[1].src= y;
                     $('.col-3').children()[0].src= ruta;
                     movimiento=movimiento+1; //incrementar un movimiento
-                    revisarTablero(); }}); //revisar si hay otro trio
+                    revisarTablero(3,1,3,0); }}); //revisar si hay otro trio
 
                     $('.dulce20').droppable({accept: '.dulce30',
                     drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1045,7 +1054,7 @@ function activarDroppables(x,y)
                     $('.col-2').children()[0].src= y;
                     $('.col-3').children()[0].src= ruta;
                     movimiento=movimiento+1; //incrementar un movimiento
-                    revisarTablero(); }}); //revisar si hay otro trio
+                    revisarTablero(2,0,3,0); }}); //revisar si hay otro trio
 
                    break;
 
@@ -1057,7 +1066,7 @@ function activarDroppables(x,y)
                      $('.col-3').children()[0].src= y;
                      $('.col-3').children()[1].src= ruta;
                      movimiento=movimiento+1; //incrementar un movimiento
-                     revisarTablero(); }}); //revisar si hay otro trio
+                     revisarTablero(3,0,3,1); }}); //revisar si hay otro trio
 
                      $('.dulce32').droppable({accept: '.dulce31',
                      drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1065,7 +1074,7 @@ function activarDroppables(x,y)
                      $('.col-3').children()[2].src= y;
                      $('.col-3').children()[1].src= ruta;
                      movimiento=movimiento+1; //incrementar un movimiento
-                     revisarTablero(); }}); //revisar si hay otro trio
+                     revisarTablero(3,2,3,1); }}); //revisar si hay otro trio
 
                      $('.dulce41').droppable({accept: '.dulce31',
                      drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1073,7 +1082,7 @@ function activarDroppables(x,y)
                      $('.col-4').children()[1].src= y;
                      $('.col-3').children()[1].src= ruta;
                      movimiento=movimiento+1; //incrementar un movimiento
-                     revisarTablero(); }}); //revisar si hay otro trio
+                     revisarTablero(4,1,3,1); }}); //revisar si hay otro trio
 
                      $('.dulce21').droppable({accept: '.dulce31',
                      drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1081,7 +1090,7 @@ function activarDroppables(x,y)
                      $('.col-2').children()[1].src= y;
                      $('.col-3').children()[1].src= ruta;
                      movimiento=movimiento+1; //incrementar un movimiento
-                     revisarTablero(); }}); //revisar si hay otro trio
+                     revisarTablero(2,1,3,1); }}); //revisar si hay otro trio
 
                     break;
 
@@ -1093,7 +1102,7 @@ function activarDroppables(x,y)
                       $('.col-3').children()[1].src= y;
                       $('.col-3').children()[2].src= ruta;
                       movimiento=movimiento+1; //incrementar un movimiento
-                      revisarTablero(); }}); //revisar si hay otro trio
+                      revisarTablero(3,1,3,2); }}); //revisar si hay otro trio
 
                       $('.dulce33').droppable({accept: '.dulce32',
                       drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1101,7 +1110,7 @@ function activarDroppables(x,y)
                       $('.col-3').children()[3].src= y;
                       $('.col-3').children()[2].src= ruta;
                       movimiento=movimiento+1; //incrementar un movimiento
-                      revisarTablero(); }}); //revisar si hay otro trio
+                      revisarTablero(3,3,3,2); }}); //revisar si hay otro trio
 
                       $('.dulce22').droppable({accept: '.dulce32',
                       drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1109,7 +1118,7 @@ function activarDroppables(x,y)
                       $('.col-2').children()[2].src= y;
                       $('.col-3').children()[2].src= ruta;
                       movimiento=movimiento+1; //incrementar un movimiento
-                      revisarTablero(); }}); //revisar si hay otro trio
+                      revisarTablero(2,2,3,2); }}); //revisar si hay otro trio
 
                       $('.dulce42').droppable({accept: '.dulce32',
                       drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1117,7 +1126,7 @@ function activarDroppables(x,y)
                       $('.col-4').children()[2].src= y;
                       $('.col-3').children()[2].src= ruta;
                       movimiento=movimiento+1; //incrementar un movimiento
-                      revisarTablero(); }}); //revisar si hay otro trio
+                      revisarTablero(4,2,3,2); }}); //revisar si hay otro trio
 
 
                      break;
@@ -1130,7 +1139,7 @@ function activarDroppables(x,y)
                        $('.col-3').children()[2].src= y;
                        $('.col-3').children()[3].src= ruta;
                        movimiento=movimiento+1; //incrementar un movimiento
-                       revisarTablero(); }}); //revisar si hay otro trio
+                       revisarTablero(3,2,3,3); }}); //revisar si hay otro trio
 
                        $('.dulce34').droppable({accept: '.dulce33',
                        drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1138,7 +1147,7 @@ function activarDroppables(x,y)
                        $('.col-3').children()[4].src= y;
                        $('.col-3').children()[3].src= ruta;
                        movimiento=movimiento+1; //incrementar un movimiento
-                       revisarTablero(); }}); //revisar si hay otro trio
+                       revisarTablero(3,4,3,3); }}); //revisar si hay otro trio
 
                        $('.dulce43').droppable({accept: '.dulce33',
                        drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1146,7 +1155,7 @@ function activarDroppables(x,y)
                        $('.col-4').children()[3].src= y;
                        $('.col-3').children()[3].src= ruta;
                        movimiento=movimiento+1; //incrementar un movimiento
-                       revisarTablero(); }}); //revisar si hay otro trio
+                       revisarTablero(4,3,3,3); }}); //revisar si hay otro trio
 
                        $('.dulce23').droppable({accept: '.dulce33',
                        drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1154,7 +1163,7 @@ function activarDroppables(x,y)
                        $('.col-2').children()[3].src= y;
                        $('.col-3').children()[3].src= ruta;
                        movimiento=movimiento+1; //incrementar un movimiento
-                       revisarTablero(); }}); //revisar si hay otro trio
+                       revisarTablero(2,3,3,3); }}); //revisar si hay otro trio
 
                        break;
 
@@ -1166,7 +1175,7 @@ function activarDroppables(x,y)
                         $('.col-3').children()[3].src= y;
                         $('.col-3').children()[4].src= ruta;
                         movimiento=movimiento+1; //incrementar un movimiento
-                        revisarTablero(); }}); //revisar si hay otro trio
+                        revisarTablero(3,3,3,4); }}); //revisar si hay otro trio
 
                         $('.dulce35').droppable({accept: '.dulce34',
                         drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1174,7 +1183,7 @@ function activarDroppables(x,y)
                         $('.col-3').children()[5].src= y;
                         $('.col-3').children()[4].src= ruta;
                         movimiento=movimiento+1; //incrementar un movimiento
-                        revisarTablero(); }}); //revisar si hay otro trio
+                        revisarTablero(3,5,3,4); }}); //revisar si hay otro trio
 
                         $('.dulce44').droppable({accept: '.dulce34',
                         drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1182,7 +1191,7 @@ function activarDroppables(x,y)
                         $('.col-4').children()[4].src= y;
                         $('.col-3').children()[4].src= ruta;
                         movimiento=movimiento+1; //incrementar un movimiento
-                        revisarTablero(); }}); //revisar si hay otro trio
+                        revisarTablero(4,4,3,4); }}); //revisar si hay otro trio
 
                         $('.dulce24').droppable({accept: '.dulce34',
                         drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1190,7 +1199,7 @@ function activarDroppables(x,y)
                         $('.col-2').children()[4].src= y;
                         $('.col-3').children()[4].src= ruta;
                         movimiento=movimiento+1; //incrementar un movimiento
-                        revisarTablero(); }}); //revisar si hay otro trio
+                        revisarTablero(2,4,3,4); }}); //revisar si hay otro trio
 
                         break;
 
@@ -1202,7 +1211,7 @@ function activarDroppables(x,y)
                          $('.col-3').children()[4].src= y;
                          $('.col-3').children()[5].src= ruta;
                          movimiento=movimiento+1; //incrementar un movimiento
-                         revisarTablero(); }}); //revisar si hay otro trio
+                         revisarTablero(3,4,3,5); }}); //revisar si hay otro trio
 
                          $('.dulce36').droppable({accept: '.dulce35',
                          drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1210,7 +1219,7 @@ function activarDroppables(x,y)
                          $('.col-3').children()[6].src= y;
                          $('.col-3').children()[5].src= ruta;
                          movimiento=movimiento+1; //incrementar un movimiento
-                         revisarTablero(); }}); //revisar si hay otro trio
+                         revisarTablero(3,6,3,5); }}); //revisar si hay otro trio
 
                          $('.dulce45').droppable({accept: '.dulce35',
                          drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1218,7 +1227,7 @@ function activarDroppables(x,y)
                          $('.col-4').children()[5].src= y;
                          $('.col-3').children()[5].src= ruta;
                          movimiento=movimiento+1; //incrementar un movimiento
-                         revisarTablero(); }}); //revisar si hay otro trio
+                         revisarTablero(4,5,3,5); }}); //revisar si hay otro trio
 
                          $('.dulce25').droppable({accept: '.dulce35',
                          drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1226,7 +1235,7 @@ function activarDroppables(x,y)
                          $('.col-25').children()[5].src= y;
                          $('.col-3').children()[5].src= ruta;
                          movimiento=movimiento+1; //incrementar un movimiento
-                         revisarTablero(); }}); //revisar si hay otro trio
+                         revisarTablero(2,5,3,5); }}); //revisar si hay otro trio
 
                         break;
 
@@ -1237,7 +1246,7 @@ function activarDroppables(x,y)
                           $('.col-3').children()[5].src= y;
                           $('.col-3').children()[6].src= ruta;
                           movimiento=movimiento+1; //incrementar un movimiento
-                          revisarTablero(); }}); //revisar si hay otro trio
+                          revisarTablero(3,5,3,6); }}); //revisar si hay otro trio
 
 
                           $('.dulce46').droppable({accept: '.dulce36',
@@ -1246,7 +1255,7 @@ function activarDroppables(x,y)
                           $('.col-4').children()[6].src= y;
                           $('.col-3').children()[6].src= ruta;
                           movimiento=movimiento+1; //incrementar un movimiento
-                          revisarTablero(); }}); //revisar si hay otro trio
+                          revisarTablero(4,6,3,6); }}); //revisar si hay otro trio
 
                           $('.dulce26').droppable({accept: '.dulce36',
                           drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1254,7 +1263,7 @@ function activarDroppables(x,y)
                           $('.col-2').children()[6].src= y;
                           $('.col-3').children()[6].src= ruta;
                           movimiento=movimiento+1; //incrementar un movimiento
-                          revisarTablero(); }}); //revisar si hay otro trio
+                          revisarTablero(2,6,3,6); }}); //revisar si hay otro trio
 
                           break;
 
@@ -1265,7 +1274,7 @@ function activarDroppables(x,y)
                             $('.col-5').children()[0].src= y;
                             $('.col-4').children()[0].src= ruta;
                             movimiento=movimiento+1; //incrementar un movimiento
-                            revisarTablero(); }}); //revisar si hay otro trio
+                            revisarTablero(5,0,4,0); }}); //revisar si hay otro trio
 
                             $('.dulce41').droppable({accept: '.dulce40',
                             drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1273,7 +1282,7 @@ function activarDroppables(x,y)
                             $('.col-4').children()[1].src= y;
                             $('.col-4').children()[0].src= ruta;
                             movimiento=movimiento+1; //incrementar un movimiento
-                            revisarTablero(); }}); //revisar si hay otro trio
+                            revisarTablero(4,1,4,0); }}); //revisar si hay otro trio
 
                             $('.dulce30').droppable({accept: '.dulce40',
                             drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1281,7 +1290,7 @@ function activarDroppables(x,y)
                             $('.col-3').children()[0].src= y;
                             $('.col-4').children()[0].src= ruta;
                             movimiento=movimiento+1; //incrementar un movimiento
-                            revisarTablero(); }}); //revisar si hay otro trio
+                            revisarTablero(3,0,4,0); }}); //revisar si hay otro trio
 
                            break;
 
@@ -1293,7 +1302,7 @@ function activarDroppables(x,y)
                              $('.col-4').children()[0].src= y;
                              $('.col-4').children()[1].src= ruta;
                              movimiento=movimiento+1; //incrementar un movimiento
-                             revisarTablero(); }}); //revisar si hay otro trio
+                             revisarTablero(4,0,4,1); }}); //revisar si hay otro trio
 
                              $('.dulce42').droppable({accept: '.dulce41',
                              drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1301,7 +1310,7 @@ function activarDroppables(x,y)
                              $('.col-4').children()[2].src= y;
                              $('.col-4').children()[1].src= ruta;
                              movimiento=movimiento+1; //incrementar un movimiento
-                             revisarTablero(); }}); //revisar si hay otro trio
+                             revisarTablero(4,2,4,1); }}); //revisar si hay otro trio
 
                              $('.dulce51').droppable({accept: '.dulce41',
                              drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1309,7 +1318,7 @@ function activarDroppables(x,y)
                              $('.col-5').children()[1].src= y;
                              $('.col-4').children()[1].src= ruta;
                              movimiento=movimiento+1; //incrementar un movimiento
-                             revisarTablero(); }}); //revisar si hay otro trio
+                             revisarTablero(5,1,4,1); }}); //revisar si hay otro trio
 
                              $('.dulce31').droppable({accept: '.dulce41',
                              drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1317,7 +1326,7 @@ function activarDroppables(x,y)
                              $('.col-3').children()[1].src= y;
                              $('.col-4').children()[1].src= ruta;
                              movimiento=movimiento+1; //incrementar un movimiento
-                             revisarTablero(); }}); //revisar si hay otro trio
+                             revisarTablero(3,1,4,1); }}); //revisar si hay otro trio
 
                             break;
 
@@ -1329,7 +1338,7 @@ function activarDroppables(x,y)
                               $('.col-4').children()[1].src= y;
                               $('.col-4').children()[2].src= ruta;
                               movimiento=movimiento+1; //incrementar un movimiento
-                              revisarTablero(); }}); //revisar si hay otro trio
+                              revisarTablero(4,1,4,2); }}); //revisar si hay otro trio
 
                               $('.dulce43').droppable({accept: '.dulce42',
                               drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1337,7 +1346,7 @@ function activarDroppables(x,y)
                               $('.col-4').children()[3].src= y;
                               $('.col-4').children()[2].src= ruta;
                               movimiento=movimiento+1; //incrementar un movimiento
-                              revisarTablero(); }}); //revisar si hay otro trio
+                              revisarTablero(4,3,4,2); }}); //revisar si hay otro trio
 
                               $('.dulce52').droppable({accept: '.dulce42',
                               drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1345,7 +1354,7 @@ function activarDroppables(x,y)
                               $('.col-5').children()[2].src= y;
                               $('.col-4').children()[2].src= ruta;
                               movimiento=movimiento+1; //incrementar un movimiento
-                              revisarTablero(); }}); //revisar si hay otro trio
+                              revisarTablero(5,2,4,2); }}); //revisar si hay otro trio
 
                               $('.dulce32').droppable({accept: '.dulce42',
                               drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1353,7 +1362,7 @@ function activarDroppables(x,y)
                               $('.col-3').children()[2].src= y;
                               $('.col-4').children()[2].src= ruta;
                               movimiento=movimiento+1; //incrementar un movimiento
-                              revisarTablero(); }}); //revisar si hay otro trio
+                              revisarTablero(3,2,4,2); }}); //revisar si hay otro trio
 
                              break;
 
@@ -1365,7 +1374,7 @@ function activarDroppables(x,y)
                                $('.col-4').children()[2].src= y;
                                $('.col-4').children()[3].src= ruta;
                                movimiento=movimiento+1; //incrementar un movimiento
-                               revisarTablero(); }}); //revisar si hay otro trio
+                               revisarTablero(4,2,4,3); }}); //revisar si hay otro trio
 
                                $('.dulce44').droppable({accept: '.dulce43',
                                drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1373,7 +1382,7 @@ function activarDroppables(x,y)
                                $('.col-4').children()[4].src= y;
                                $('.col-4').children()[3].src= ruta;
                                movimiento=movimiento+1; //incrementar un movimiento
-                               revisarTablero(); }}); //revisar si hay otro trio
+                               revisarTablero(4,4,4,3); }}); //revisar si hay otro trio
 
                                $('.dulce53').droppable({accept: '.dulce43',
                                drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1381,7 +1390,7 @@ function activarDroppables(x,y)
                                $('.col-5').children()[3].src= y;
                                $('.col-4').children()[3].src= ruta;
                                movimiento=movimiento+1; //incrementar un movimiento
-                               revisarTablero(); }}); //revisar si hay otro trio
+                               revisarTablero(5,3,4,3); }}); //revisar si hay otro trio
 
                                $('.dulce33').droppable({accept: '.dulce43',
                                drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1389,7 +1398,7 @@ function activarDroppables(x,y)
                                $('.col-3').children()[3].src= y;
                                $('.col-4').children()[3].src= ruta;
                                movimiento=movimiento+1; //incrementar un movimiento
-                               revisarTablero(); }}); //revisar si hay otro trio
+                               revisarTablero(3,3,4,3); }}); //revisar si hay otro trio
 
                                break;
 
@@ -1401,7 +1410,7 @@ function activarDroppables(x,y)
                                 $('.col-4').children()[3].src= y;
                                 $('.col-4').children()[4].src= ruta;
                                 movimiento=movimiento+1; //incrementar un movimiento
-                                revisarTablero(); }}); //revisar si hay otro trio
+                                revisarTablero(4,3,4,4); }}); //revisar si hay otro trio
 
                                 $('.dulce45').droppable({accept: '.dulce44',
                                 drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1409,7 +1418,7 @@ function activarDroppables(x,y)
                                 $('.col-4').children()[5].src= y;
                                 $('.col-4').children()[4].src= ruta;
                                 movimiento=movimiento+1; //incrementar un movimiento
-                                revisarTablero(); }}); //revisar si hay otro trio
+                                revisarTablero(4,5,4,4); }}); //revisar si hay otro trio
 
                                 $('.dulce54').droppable({accept: '.dulce44',
                                 drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1417,7 +1426,7 @@ function activarDroppables(x,y)
                                 $('.col-5').children()[4].src= y;
                                 $('.col-4').children()[4].src= ruta;
                                 movimiento=movimiento+1; //incrementar un movimiento
-                                revisarTablero(); }}); //revisar si hay otro trio
+                                revisarTablero(5,4,4,4); }}); //revisar si hay otro trio
 
                                 $('.dulce34').droppable({accept: '.dulce44',
                                 drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1425,7 +1434,7 @@ function activarDroppables(x,y)
                                 $('.col-3').children()[4].src= y;
                                 $('.col-4').children()[4].src= ruta;
                                 movimiento=movimiento+1; //incrementar un movimiento
-                                revisarTablero(); }}); //revisar si hay otro trio
+                                revisarTablero(3,4,4,4); }}); //revisar si hay otro trio
 
                                 break;
 
@@ -1437,7 +1446,7 @@ function activarDroppables(x,y)
                                  $('.col-4').children()[4].src= y;
                                  $('.col-4').children()[5].src= ruta;
                                  movimiento=movimiento+1; //incrementar un movimiento
-                                 revisarTablero(); }}); //revisar si hay otro trio
+                                 revisarTablero(4,4,4,5); }}); //revisar si hay otro trio
 
                                  $('.dulce46').droppable({accept: '.dulce45',
                                  drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1445,7 +1454,7 @@ function activarDroppables(x,y)
                                  $('.col-4').children()[6].src= y;
                                  $('.col-4').children()[5].src= ruta;
                                  movimiento=movimiento+1; //incrementar un movimiento
-                                 revisarTablero(); }}); //revisar si hay otro trio
+                                 revisarTablero(4,6,4,5); }}); //revisar si hay otro trio
 
                                  $('.dulce55').droppable({accept: '.dulce45',
                                  drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1453,7 +1462,7 @@ function activarDroppables(x,y)
                                  $('.col-5').children()[5].src= y;
                                  $('.col-4').children()[5].src= ruta;
                                  movimiento=movimiento+1; //incrementar un movimiento
-                                 revisarTablero(); }}); //revisar si hay otro trio
+                                 revisarTablero(5,5,4,5); }}); //revisar si hay otro trio
 
                                  $('.dulce35').droppable({accept: '.dulce45',
                                  drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1461,7 +1470,7 @@ function activarDroppables(x,y)
                                  $('.col-3').children()[5].src= y;
                                  $('.col-4').children()[5].src= ruta;
                                  movimiento=movimiento+1; //incrementar un movimiento
-                                 revisarTablero(); }}); //revisar si hay otro trio
+                                 revisarTablero(3,5,4,5); }}); //revisar si hay otro trio
 
                                 break;
 
@@ -1472,7 +1481,7 @@ function activarDroppables(x,y)
                                   $('.col-4').children()[5].src= y;
                                   $('.col-4').children()[6].src= ruta;
                                   movimiento=movimiento+1; //incrementar un movimiento
-                                  revisarTablero(); }}); //revisar si hay otro trio
+                                  revisarTablero(4,5,4,6); }}); //revisar si hay otro trio
 
 
                                   $('.dulce56').droppable({accept: '.dulce46',
@@ -1481,7 +1490,7 @@ function activarDroppables(x,y)
                                   $('.col-5').children()[6].src= y;
                                   $('.col-4').children()[6].src= ruta;
                                   movimiento=movimiento+1; //incrementar un movimiento
-                                  revisarTablero(); }}); //revisar si hay otro trio
+                                  revisarTablero(5,6,4,6); }}); //revisar si hay otro trio
 
                                   $('.dulce36').droppable({accept: '.dulce46',
                                   drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1489,7 +1498,7 @@ function activarDroppables(x,y)
                                   $('.col-3').children()[6].src= y;
                                   $('.col-4').children()[6].src= ruta;
                                   movimiento=movimiento+1; //incrementar un movimiento
-                                  revisarTablero(); }}); //revisar si hay otro trio
+                                  revisarTablero(3,6,4,6); }}); //revisar si hay otro trio
 
                                   break;
 
@@ -1502,7 +1511,7 @@ function activarDroppables(x,y)
                                     $('.col-6').children()[0].src= y;
                                     $('.col-5').children()[0].src= ruta;
                                     movimiento=movimiento+1; //incrementar un movimiento
-                                    revisarTablero(); }}); //revisar si hay otro trio
+                                    revisarTablero(6,0,5,0); }}); //revisar si hay otro trio
 
                                     $('.dulce51').droppable({accept: '.dulce50',
                                     drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1510,7 +1519,7 @@ function activarDroppables(x,y)
                                     $('.col-5').children()[1].src= y;
                                     $('.col-5').children()[0].src= ruta;
                                     movimiento=movimiento+1; //incrementar un movimiento
-                                    revisarTablero(); }}); //revisar si hay otro trio
+                                    revisarTablero(5,1,5,0); }}); //revisar si hay otro trio
 
                                     $('.dulce40').droppable({accept: '.dulce50',
                                     drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1518,7 +1527,7 @@ function activarDroppables(x,y)
                                     $('.col-4').children()[2].src= y;
                                     $('.col-5').children()[0].src= ruta;
                                     movimiento=movimiento+1; //incrementar un movimiento
-                                    revisarTablero(); }}); //revisar si hay otro trio
+                                    revisarTablero(4,0,5,0); }}); //revisar si hay otro trio
 
                                    break;
 
@@ -1530,7 +1539,7 @@ function activarDroppables(x,y)
                                      $('.col-5').children()[0].src= y;
                                      $('.col-5').children()[1].src= ruta;
                                      movimiento=movimiento+1; //incrementar un movimiento
-                                     revisarTablero(); }}); //revisar si hay otro trio
+                                     revisarTablero(5,0,5,1); }}); //revisar si hay otro trio
 
                                      $('.dulce52').droppable({accept: '.dulce51',
                                      drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1538,7 +1547,7 @@ function activarDroppables(x,y)
                                      $('.col-5').children()[2].src= y;
                                      $('.col-5').children()[1].src= ruta;
                                      movimiento=movimiento+1; //incrementar un movimiento
-                                     revisarTablero(); }}); //revisar si hay otro trio
+                                     revisarTablero(5,2,5,1); }}); //revisar si hay otro trio
 
                                      $('.dulce61').droppable({accept: '.dulce51',
                                      drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1546,7 +1555,7 @@ function activarDroppables(x,y)
                                      $('.col-6').children()[1].src= y;
                                      $('.col-5').children()[1].src= ruta;
                                      movimiento=movimiento+1; //incrementar un movimiento
-                                     revisarTablero(); }}); //revisar si hay otro trio
+                                     revisarTablero(6,1,5,1); }}); //revisar si hay otro trio
 
                                      $('.dulce41').droppable({accept: '.dulce51',
                                      drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1554,7 +1563,7 @@ function activarDroppables(x,y)
                                      $('.col-4').children()[1].src= y;
                                      $('.col-5').children()[1].src= ruta;
                                      movimiento=movimiento+1; //incrementar un movimiento
-                                     revisarTablero(); }}); //revisar si hay otro trio
+                                     revisarTablero(4,1,5,1); }}); //revisar si hay otro trio
 
                                     break;
 
@@ -1566,7 +1575,7 @@ function activarDroppables(x,y)
                                       $('.col-5').children()[1].src= y;
                                       $('.col-5').children()[2].src= ruta;
                                       movimiento=movimiento+1; //incrementar un movimiento
-                                      revisarTablero(); }}); //revisar si hay otro trio
+                                      revisarTablero(5,1,5,2); }}); //revisar si hay otro trio
 
                                       $('.dulce53').droppable({accept: '.dulce52',
                                       drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1574,7 +1583,7 @@ function activarDroppables(x,y)
                                       $('.col-5').children()[3].src= y;
                                       $('.col-5').children()[2].src= ruta;
                                       movimiento=movimiento+1; //incrementar un movimiento
-                                      revisarTablero(); }}); //revisar si hay otro trio
+                                      revisarTablero(5,3,5,2); }}); //revisar si hay otro trio
 
                                       $('.dulce62').droppable({accept: '.dulce52',
                                       drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1582,7 +1591,7 @@ function activarDroppables(x,y)
                                       $('.col-6').children()[2].src= y;
                                       $('.col-5').children()[2].src= ruta;
                                       movimiento=movimiento+1; //incrementar un movimiento
-                                      revisarTablero(); }}); //revisar si hay otro trio
+                                      revisarTablero(6,2,5,2); }}); //revisar si hay otro trio
 
                                       $('.dulce42').droppable({accept: '.dulce52',
                                       drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1590,7 +1599,7 @@ function activarDroppables(x,y)
                                       $('.col-4').children()[2].src= y;
                                       $('.col-5').children()[2].src= ruta;
                                       movimiento=movimiento+1; //incrementar un movimiento
-                                      revisarTablero(); }}); //revisar si hay otro trio
+                                      revisarTablero(4,2,5,2); }}); //revisar si hay otro trio
 
                                      break;
 
@@ -1602,7 +1611,7 @@ function activarDroppables(x,y)
                                        $('.col-5').children()[2].src= y;
                                        $('.col-5').children()[3].src= ruta;
                                        movimiento=movimiento+1; //incrementar un movimiento
-                                       revisarTablero(); }}); //revisar si hay otro trio
+                                       revisarTablero(5,2,5,3); }}); //revisar si hay otro trio
 
                                        $('.dulce54').droppable({accept: '.dulce53',
                                        drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1610,7 +1619,7 @@ function activarDroppables(x,y)
                                        $('.col-5').children()[4].src= y;
                                        $('.col-5').children()[3].src= ruta;
                                        movimiento=movimiento+1; //incrementar un movimiento
-                                       revisarTablero(); }}); //revisar si hay otro trio
+                                       revisarTablero(5,4,5,3); }}); //revisar si hay otro trio
 
                                        $('.dulce63').droppable({accept: '.dulce53',
                                        drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1618,7 +1627,7 @@ function activarDroppables(x,y)
                                        $('.col-6').children()[3].src= y;
                                        $('.col-5').children()[3].src= ruta;
                                        movimiento=movimiento+1; //incrementar un movimiento
-                                       revisarTablero(); }}); //revisar si hay otro trio
+                                       revisarTablero(6,3,5,3); }}); //revisar si hay otro trio
 
                                        $('.dulce43').droppable({accept: '.dulce53',
                                        drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1626,7 +1635,7 @@ function activarDroppables(x,y)
                                        $('.col-4').children()[3].src= y;
                                        $('.col-5').children()[3].src= ruta;
                                        movimiento=movimiento+1; //incrementar un movimiento
-                                       revisarTablero(); }}); //revisar si hay otro trio
+                                       revisarTablero(4,3,5,3); }}); //revisar si hay otro trio
 
                                        break;
 
@@ -1638,7 +1647,7 @@ function activarDroppables(x,y)
                                         $('.col-5').children()[3].src= y;
                                         $('.col-5').children()[4].src= ruta;
                                         movimiento=movimiento+1; //incrementar un movimiento
-                                        revisarTablero(); }}); //revisar si hay otro trio
+                                        revisarTablero(5,3,5,4); }}); //revisar si hay otro trio
 
                                         $('.dulce55').droppable({accept: '.dulce54',
                                         drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1646,7 +1655,7 @@ function activarDroppables(x,y)
                                         $('.col-5').children()[5].src= y;
                                         $('.col-5').children()[4].src= ruta;
                                         movimiento=movimiento+1; //incrementar un movimiento
-                                        revisarTablero(); }}); //revisar si hay otro trio
+                                        revisarTablero(5,5,5,4); }}); //revisar si hay otro trio
 
                                         $('.dulce64').droppable({accept: '.dulce54',
                                         drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1654,7 +1663,7 @@ function activarDroppables(x,y)
                                         $('.col-6').children()[4].src= y;
                                         $('.col-5').children()[4].src= ruta;
                                         movimiento=movimiento+1; //incrementar un movimiento
-                                        revisarTablero(); }}); //revisar si hay otro trio
+                                        revisarTablero(6,4,5,4); }}); //revisar si hay otro trio
 
                                         $('.dulce44').droppable({accept: '.dulce54',
                                         drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1662,7 +1671,7 @@ function activarDroppables(x,y)
                                         $('.col-4').children()[4].src= y;
                                         $('.col-5').children()[4].src= ruta;
                                         movimiento=movimiento+1; //incrementar un movimiento
-                                        revisarTablero(); }}); //revisar si hay otro trio
+                                        revisarTablero(4,4,5,4); }}); //revisar si hay otro trio
 
                                         break;
 
@@ -1674,7 +1683,7 @@ function activarDroppables(x,y)
                                          $('.col-5').children()[4].src= y;
                                          $('.col-5').children()[5].src= ruta;
                                          movimiento=movimiento+1; //incrementar un movimiento
-                                         revisarTablero(); }}); //revisar si hay otro trio
+                                         revisarTablero(5,4,5,5); }}); //revisar si hay otro trio
 
                                          $('.dulce56').droppable({accept: '.dulce55',
                                          drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1682,7 +1691,7 @@ function activarDroppables(x,y)
                                          $('.col-5').children()[6].src= y;
                                          $('.col-5').children()[5].src= ruta;
                                          movimiento=movimiento+1; //incrementar un movimiento
-                                         revisarTablero(); }}); //revisar si hay otro trio
+                                         revisarTablero(5,6,5,5); }}); //revisar si hay otro trio
 
                                          $('.dulce65').droppable({accept: '.dulce55',
                                          drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1690,7 +1699,7 @@ function activarDroppables(x,y)
                                          $('.col-6').children()[5].src= y;
                                          $('.col-5').children()[5].src= ruta;
                                          movimiento=movimiento+1; //incrementar un movimiento
-                                         revisarTablero(); }}); //revisar si hay otro trio
+                                         revisarTablero(6,5,5,5); }}); //revisar si hay otro trio
 
                                          $('.dulce45').droppable({accept: '.dulce55',
                                          drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1698,7 +1707,7 @@ function activarDroppables(x,y)
                                          $('.col-4').children()[5].src= y;
                                          $('.col-5').children()[5].src= ruta;
                                          movimiento=movimiento+1; //incrementar un movimiento
-                                         revisarTablero(); }}); //revisar si hay otro trio
+                                         revisarTablero(4,5,5,5); }}); //revisar si hay otro trio
 
                                         break;
 
@@ -1709,7 +1718,7 @@ function activarDroppables(x,y)
                                           $('.col-5').children()[5].src= y;
                                           $('.col-5').children()[6].src= ruta;
                                           movimiento=movimiento+1; //incrementar un movimiento
-                                          revisarTablero(); }}); //revisar si hay otro trio
+                                          revisarTablero(5,5,5,6); }}); //revisar si hay otro trio
 
 
                                           $('.dulce66').droppable({accept: '.dulce56',
@@ -1718,7 +1727,7 @@ function activarDroppables(x,y)
                                           $('.col-6').children()[6].src= y;
                                           $('.col-5').children()[6].src= ruta;
                                           movimiento=movimiento+1; //incrementar un movimiento
-                                          revisarTablero(); }}); //revisar si hay otro trio
+                                          revisarTablero(6,6,5,6); }}); //revisar si hay otro trio
 
                                           $('.dulce46').droppable({accept: '.dulce56',
                                           drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1726,7 +1735,7 @@ function activarDroppables(x,y)
                                           $('.col-4').children()[6].src= y;
                                           $('.col-5').children()[6].src= ruta;
                                           movimiento=movimiento+1; //incrementar un movimiento
-                                          revisarTablero(); }}); //revisar si hay otro trio
+                                          revisarTablero(4,6,5,6); }}); //revisar si hay otro trio
 
                                           break;
 
@@ -1737,7 +1746,7 @@ function activarDroppables(x,y)
                                             $('.col-7').children()[0].src= y;
                                             $('.col-6').children()[0].src= ruta;
                                             movimiento=movimiento+1; //incrementar un movimiento
-                                            revisarTablero(); }}); //revisar si hay otro trio
+                                            revisarTablero(7,0,6,0); }}); //revisar si hay otro trio
 
                                             $('.dulce61').droppable({accept: '.dulce60',
                                             drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1745,7 +1754,7 @@ function activarDroppables(x,y)
                                             $('.col-6').children()[1].src= y;
                                             $('.col-6').children()[0].src= ruta;
                                             movimiento=movimiento+1; //incrementar un movimiento
-                                            revisarTablero(); }}); //revisar si hay otro trio
+                                            revisarTablero(6,1,6,0); }}); //revisar si hay otro trio
 
                                             $('.dulce50').droppable({accept: '.dulce60',
                                             drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1753,7 +1762,7 @@ function activarDroppables(x,y)
                                             $('.col-5').children()[0].src= y;
                                             $('.col-6').children()[0].src= ruta;
                                             movimiento=movimiento+1; //incrementar un movimiento
-                                            revisarTablero(); }}); //revisar si hay otro trio
+                                            revisarTablero(5,0,6,0); }}); //revisar si hay otro trio
 
                                            break;
 
@@ -1765,7 +1774,7 @@ function activarDroppables(x,y)
                                              $('.col-6').children()[0].src= y;
                                              $('.col-6').children()[1].src= ruta;
                                              movimiento=movimiento+1; //incrementar un movimiento
-                                             revisarTablero(); }}); //revisar si hay otro trio
+                                             revisarTablero(6,0,6,1); }}); //revisar si hay otro trio
 
                                              $('.dulce62').droppable({accept: '.dulce61',
                                              drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1773,7 +1782,7 @@ function activarDroppables(x,y)
                                              $('.col-6').children()[2].src= y;
                                              $('.col-6').children()[1].src= ruta;
                                              movimiento=movimiento+1; //incrementar un movimiento
-                                             revisarTablero(); }}); //revisar si hay otro trio
+                                             revisarTablero(6,2,6,1); }}); //revisar si hay otro trio
 
                                              $('.dulce71').droppable({accept: '.dulce61',
                                              drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1781,7 +1790,7 @@ function activarDroppables(x,y)
                                              $('.col-7').children()[1].src= y;
                                              $('.col-6').children()[1].src= ruta;
                                              movimiento=movimiento+1; //incrementar un movimiento
-                                             revisarTablero(); }}); //revisar si hay otro trio
+                                             revisarTablero(7,1,6,1); }}); //revisar si hay otro trio
 
                                              $('.dulce51').droppable({accept: '.dulce61',
                                              drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1789,7 +1798,7 @@ function activarDroppables(x,y)
                                              $('.col-5').children()[1].src= y;
                                              $('.col-6').children()[1].src= ruta;
                                              movimiento=movimiento+1; //incrementar un movimiento
-                                             revisarTablero(); }}); //revisar si hay otro trio
+                                             revisarTablero(5,1,6,1); }}); //revisar si hay otro trio
 
                                             break;
 
@@ -1801,7 +1810,7 @@ function activarDroppables(x,y)
                                               $('.col-6').children()[1].src= y;
                                               $('.col-6').children()[2].src= ruta;
                                               movimiento=movimiento+1; //incrementar un movimiento
-                                              revisarTablero(); }}); //revisar si hay otro trio
+                                              revisarTablero(6,1,6,2); }}); //revisar si hay otro trio
 
                                               $('.dulce63').droppable({accept: '.dulce62',
                                               drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1809,7 +1818,7 @@ function activarDroppables(x,y)
                                               $('.col-6').children()[3].src= y;
                                               $('.col-6').children()[2].src= ruta;
                                               movimiento=movimiento+1; //incrementar un movimiento
-                                              revisarTablero(); }}); //revisar si hay otro trio
+                                              revisarTablero(6,3,6,2); }}); //revisar si hay otro trio
 
                                               $('.dulce52').droppable({accept: '.dulce62',
                                               drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1817,7 +1826,7 @@ function activarDroppables(x,y)
                                               $('.col-5').children()[2].src= y;
                                               $('.col-6').children()[2].src= ruta;
                                               movimiento=movimiento+1; //incrementar un movimiento
-                                              revisarTablero(); }}); //revisar si hay otro trio
+                                              revisarTablero(5,2,6,2); }}); //revisar si hay otro trio
 
                                               $('.dulce72').droppable({accept: '.dulce62',
                                               drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1825,7 +1834,7 @@ function activarDroppables(x,y)
                                               $('.col-7').children()[2].src= y;
                                               $('.col-6').children()[2].src= ruta;
                                               movimiento=movimiento+1; //incrementar un movimiento
-                                              revisarTablero(); }}); //revisar si hay otro trio
+                                              revisarTablero(7,2,6,2); }}); //revisar si hay otro trio
 
                                              break;
 
@@ -1837,7 +1846,7 @@ function activarDroppables(x,y)
                                                $('.col-6').children()[2].src= y;
                                                $('.col-6').children()[3].src= ruta;
                                                movimiento=movimiento+1; //incrementar un movimiento
-                                               revisarTablero(); }}); //revisar si hay otro trio
+                                               revisarTablero(6,2,6,3); }}); //revisar si hay otro trio
 
                                                $('.dulce64').droppable({accept: '.dulce63',
                                                drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1845,7 +1854,7 @@ function activarDroppables(x,y)
                                                $('.col-6').children()[4].src= y;
                                                $('.col-6').children()[3].src= ruta;
                                                movimiento=movimiento+1; //incrementar un movimiento
-                                               revisarTablero(); }}); //revisar si hay otro trio
+                                               revisarTablero(6,4,6,3); }}); //revisar si hay otro trio
 
                                                $('.dulce73').droppable({accept: '.dulce63',
                                                drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1853,7 +1862,7 @@ function activarDroppables(x,y)
                                                $('.col-7').children()[3].src= y;
                                                $('.col-6').children()[3].src= ruta;
                                                movimiento=movimiento+1; //incrementar un movimiento
-                                               revisarTablero(); }}); //revisar si hay otro trio
+                                               revisarTablero(7,3,6,3); }}); //revisar si hay otro trio
 
                                                $('.dulce53').droppable({accept: '.dulce63',
                                                drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1861,7 +1870,7 @@ function activarDroppables(x,y)
                                                $('.col-5').children()[3].src= y;
                                                $('.col-6').children()[3].src= ruta;
                                                movimiento=movimiento+1; //incrementar un movimiento
-                                               revisarTablero(); }}); //revisar si hay otro trio
+                                               revisarTablero(5,3,6,3); }}); //revisar si hay otro trio
 
                                                break;
 
@@ -1873,7 +1882,7 @@ function activarDroppables(x,y)
                                                 $('.col-6').children()[3].src= y;
                                                 $('.col-6').children()[4].src= ruta;
                                                 movimiento=movimiento+1; //incrementar un movimiento
-                                                revisarTablero(); }}); //revisar si hay otro trio
+                                                revisarTablero(6,3,6,4); }}); //revisar si hay otro trio
 
                                                 $('.dulce65').droppable({accept: '.dulce64',
                                                 drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1881,7 +1890,7 @@ function activarDroppables(x,y)
                                                 $('.col-6').children()[5].src= y;
                                                 $('.col-6').children()[4].src= ruta;
                                                 movimiento=movimiento+1; //incrementar un movimiento
-                                                revisarTablero(); }}); //revisar si hay otro trio
+                                                revisarTablero(6,5,6,4); }}); //revisar si hay otro trio
 
                                                 $('.dulce74').droppable({accept: '.dulce64',
                                                 drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1889,7 +1898,7 @@ function activarDroppables(x,y)
                                                 $('.col-7').children()[4].src= y;
                                                 $('.col-6').children()[4].src= ruta;
                                                 movimiento=movimiento+1; //incrementar un movimiento
-                                                revisarTablero(); }}); //revisar si hay otro trio
+                                                revisarTablero(7,4,6,4); }}); //revisar si hay otro trio
 
                                                 $('.dulce54').droppable({accept: '.dulce64',
                                                 drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1897,7 +1906,7 @@ function activarDroppables(x,y)
                                                 $('.col-5').children()[4].src= y;
                                                 $('.col-6').children()[4].src= ruta;
                                                 movimiento=movimiento+1; //incrementar un movimiento
-                                                revisarTablero(); }}); //revisar si hay otro trio
+                                                revisarTablero(5,4,6,4); }}); //revisar si hay otro trio
 
                                                 break;
 
@@ -1909,7 +1918,7 @@ function activarDroppables(x,y)
                                                  $('.col-6').children()[4].src= y;
                                                  $('.col-6').children()[5].src= ruta;
                                                  movimiento=movimiento+1; //incrementar un movimiento
-                                                 revisarTablero(); }}); //revisar si hay otro trio
+                                                 revisarTablero(6,4,6,5); }}); //revisar si hay otro trio
 
                                                  $('.dulce66').droppable({accept: '.dulce65',
                                                  drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1917,7 +1926,7 @@ function activarDroppables(x,y)
                                                  $('.col-6').children()[6].src= y;
                                                  $('.col-6').children()[5].src= ruta;
                                                  movimiento=movimiento+1; //incrementar un movimiento
-                                                 revisarTablero(); }}); //revisar si hay otro trio
+                                                 revisarTablero(6,6,6,5); }}); //revisar si hay otro trio
 
                                                  $('.dulce75').droppable({accept: '.dulce65',
                                                  drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1925,7 +1934,7 @@ function activarDroppables(x,y)
                                                  $('.col-7').children()[5].src= y;
                                                  $('.col-6').children()[5].src= ruta;
                                                  movimiento=movimiento+1; //incrementar un movimiento
-                                                 revisarTablero(); }}); //revisar si hay otro trio
+                                                 revisarTablero(7,5,6,5); }}); //revisar si hay otro trio
 
                                                  $('.dulce55').droppable({accept: '.dulce65',
                                                  drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1933,7 +1942,7 @@ function activarDroppables(x,y)
                                                  $('.col-5').children()[5].src= y;
                                                  $('.col-6').children()[5].src= ruta;
                                                  movimiento=movimiento+1; //incrementar un movimiento
-                                                 revisarTablero(); }}); //revisar si hay otro trio
+                                                 revisarTablero(5,5,6,5); }}); //revisar si hay otro trio
 
                                                 break;
 
@@ -1944,7 +1953,7 @@ function activarDroppables(x,y)
                                                   $('.col-6').children()[5].src= y;
                                                   $('.col-6').children()[6].src= ruta;
                                                   movimiento=movimiento+1; //incrementar un movimiento
-                                                  revisarTablero(); }}); //revisar si hay otro trio
+                                                  revisarTablero(6,5,6,6); }}); //revisar si hay otro trio
 
 
                                                   $('.dulce76').droppable({accept: '.dulce66',
@@ -1953,7 +1962,7 @@ function activarDroppables(x,y)
                                                   $('.col-7').children()[6].src= y;
                                                   $('.col-6').children()[6].src= ruta;
                                                   movimiento=movimiento+1; //incrementar un movimiento
-                                                  revisarTablero(); }}); //revisar si hay otro trio
+                                                  revisarTablero(7,6,6,6); }}); //revisar si hay otro trio
 
                                                   $('.dulce56').droppable({accept: '.dulce66',
                                                   drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1961,7 +1970,7 @@ function activarDroppables(x,y)
                                                   $('.col-5').children()[6].src= y;
                                                   $('.col-6').children()[6].src= ruta;
                                                   movimiento=movimiento+1; //incrementar un movimiento
-                                                  revisarTablero(); }}); //revisar si hay otro trio
+                                                  revisarTablero(5,6,6,6); }}); //revisar si hay otro trio
 
                                                   break;
 
@@ -1973,7 +1982,7 @@ function activarDroppables(x,y)
                                                     $('.col-7').children()[1].src= y;
                                                     $('.col-7').children()[0].src= ruta;
                                                     movimiento=movimiento+1; //incrementar un movimiento
-                                                    revisarTablero(); }}); //revisar si hay otro trio
+                                                    revisarTablero(7,1,7,0); }}); //revisar si hay otro trio
 
                                                     $('.dulce60').droppable({accept: '.dulce70',
                                                     drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -1981,7 +1990,7 @@ function activarDroppables(x,y)
                                                     $('.col-6').children()[0].src= y;
                                                     $('.col-7').children()[0].src= ruta;
                                                     movimiento=movimiento+1; //incrementar un movimiento
-                                                    revisarTablero(); }}); //revisar si hay otro trio
+                                                    revisarTablero(6,0,7,0); }}); //revisar si hay otro trio
 
                                                    break;
 
@@ -1993,7 +2002,7 @@ function activarDroppables(x,y)
                                                      $('.col-7').children()[0].src= y;
                                                      $('.col-7').children()[1].src= ruta;
                                                      movimiento=movimiento+1; //incrementar un movimiento
-                                                     revisarTablero(); }}); //revisar si hay otro trio
+                                                     revisarTablero(7,0,7,1); }}); //revisar si hay otro trio
 
                                                      $('.dulce72').droppable({accept: '.dulce71',
                                                      drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -2001,7 +2010,7 @@ function activarDroppables(x,y)
                                                      $('.col-7').children()[2].src= y;
                                                      $('.col-7').children()[1].src= ruta;
                                                      movimiento=movimiento+1; //incrementar un movimiento
-                                                     revisarTablero(); }}); //revisar si hay otro trio
+                                                     revisarTablero(7,2,7,1); }}); //revisar si hay otro trio
 
 
                                                      $('.dulce61').droppable({accept: '.dulce71',
@@ -2010,7 +2019,7 @@ function activarDroppables(x,y)
                                                      $('.col-6').children()[1].src= y;
                                                      $('.col-7').children()[1].src= ruta;
                                                      movimiento=movimiento+1; //incrementar un movimiento
-                                                     revisarTablero(); }}); //revisar si hay otro trio
+                                                     revisarTablero(6,1,7,1); }}); //revisar si hay otro trio
 
                                                     break;
 
@@ -2022,7 +2031,7 @@ function activarDroppables(x,y)
                                                       $('.col-7').children()[1].src= y;
                                                       $('.col-7').children()[2].src= ruta;
                                                       movimiento=movimiento+1; //incrementar un movimiento
-                                                      revisarTablero(); }}); //revisar si hay otro trio
+                                                      revisarTablero(7,1,7,2); }}); //revisar si hay otro trio
 
                                                       $('.dulce73').droppable({accept: '.dulce72',
                                                       drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -2030,7 +2039,7 @@ function activarDroppables(x,y)
                                                       $('.col-7').children()[3].src= y;
                                                       $('.col-7').children()[2].src= ruta;
                                                       movimiento=movimiento+1; //incrementar un movimiento
-                                                      revisarTablero(); }}); //revisar si hay otro trio
+                                                      revisarTablero(7,3,7,2); }}); //revisar si hay otro trio
 
                                                       $('.dulce62').droppable({accept: '.dulce72',
                                                       drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -2038,7 +2047,7 @@ function activarDroppables(x,y)
                                                       $('.col-6').children()[2].src= y;
                                                       $('.col-7').children()[2].src= ruta;
                                                       movimiento=movimiento+1; //incrementar un movimiento
-                                                      revisarTablero(); }}); //revisar si hay otro trio
+                                                      revisarTablero(6,2,7,2); }}); //revisar si hay otro trio
 
 
                                                      break;
@@ -2051,7 +2060,7 @@ function activarDroppables(x,y)
                                                        $('.col-7').children()[2].src= y;
                                                        $('.col-7').children()[3].src= ruta;
                                                        movimiento=movimiento+1; //incrementar un movimiento
-                                                       revisarTablero(); }}); //revisar si hay otro trio
+                                                       revisarTablero(7,2,7,3); }}); //revisar si hay otro trio
 
                                                        $('.dulce74').droppable({accept: '.dulce73',
                                                        drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -2059,7 +2068,7 @@ function activarDroppables(x,y)
                                                        $('.col-7').children()[4].src= y;
                                                        $('.col-7').children()[3].src= ruta;
                                                        movimiento=movimiento+1; //incrementar un movimiento
-                                                       revisarTablero(); }}); //revisar si hay otro trio
+                                                       revisarTablero(7,4,7,3); }}); //revisar si hay otro trio
 
 
                                                        $('.dulce63').droppable({accept: '.dulce73',
@@ -2068,7 +2077,7 @@ function activarDroppables(x,y)
                                                        $('.col-6').children()[3].src= y;
                                                        $('.col-7').children()[3].src= ruta;
                                                        movimiento=movimiento+1; //incrementar un movimiento
-                                                       revisarTablero(); }}); //revisar si hay otro trio
+                                                       revisarTablero(6,3,7,3); }}); //revisar si hay otro trio
 
                                                        break;
 
@@ -2080,7 +2089,7 @@ function activarDroppables(x,y)
                                                         $('.col-7').children()[3].src= y;
                                                         $('.col-7').children()[4].src= ruta;
                                                         movimiento=movimiento+1; //incrementar un movimiento
-                                                        revisarTablero(); }}); //revisar si hay otro trio
+                                                        revisarTablero(7,3,7,4); }}); //revisar si hay otro trio
 
                                                         $('.dulce75').droppable({accept: '.dulce74',
                                                         drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -2088,7 +2097,7 @@ function activarDroppables(x,y)
                                                         $('.col-7').children()[5].src= y;
                                                         $('.col-7').children()[4].src= ruta;
                                                         movimiento=movimiento+1; //incrementar un movimiento
-                                                        revisarTablero(); }}); //revisar si hay otro trio
+                                                        revisarTablero(7,5,7,4); }}); //revisar si hay otro trio
 
 
                                                         $('.dulce64').droppable({accept: '.dulce74',
@@ -2097,7 +2106,7 @@ function activarDroppables(x,y)
                                                         $('.col-6').children()[4].src= y;
                                                         $('.col-7').children()[4].src= ruta;
                                                         movimiento=movimiento+1; //incrementar un movimiento
-                                                        revisarTablero(); }}); //revisar si hay otro trio
+                                                        revisarTablero(6,4,7,4); }}); //revisar si hay otro trio
 
                                                         break;
 
@@ -2109,7 +2118,7 @@ function activarDroppables(x,y)
                                                          $('.col-7').children()[4].src= y;
                                                          $('.col-7').children()[5].src= ruta;
                                                          movimiento=movimiento+1; //incrementar un movimiento
-                                                         revisarTablero(); }}); //revisar si hay otro trio
+                                                         revisarTablero(7,4,7,5); }}); //revisar si hay otro trio
 
                                                          $('.dulce76').droppable({accept: '.dulce75',
                                                          drop: function(event, ui){$(ui.draggable).css({ width: "100%",  position: "relative",left: "auto", top: "auto" })
@@ -2117,7 +2126,7 @@ function activarDroppables(x,y)
                                                          $('.col-7').children()[6].src= y;
                                                          $('.col-7').children()[5].src= ruta;
                                                          movimiento=movimiento+1; //incrementar un movimiento
-                                                         revisarTablero(); }}); //revisar si hay otro trio
+                                                         revisarTablero(7,6,7,5); }}); //revisar si hay otro trio
 
 
                                                          $('.dulce65').droppable({accept: '.dulce75',
@@ -2126,7 +2135,7 @@ function activarDroppables(x,y)
                                                          $('.col-6').children()[5].src= y;
                                                          $('.col-7').children()[5].src= ruta;
                                                          movimiento=movimiento+1; //incrementar un movimiento
-                                                         revisarTablero(); }}); //revisar si hay otro trio
+                                                         revisarTablero(6,5,7,5); }}); //revisar si hay otro trio
 
                                                         break;
 
@@ -2137,7 +2146,7 @@ function activarDroppables(x,y)
                                                           $('.col-7').children()[5].src= y;
                                                           $('.col-7').children()[6].src= ruta;
                                                           movimiento=movimiento+1; //incrementar un movimiento
-                                                          revisarTablero(); }}); //revisar si hay otro trio
+                                                          revisarTablero(7,5,7,6); }}); //revisar si hay otro trio
 
 
 
@@ -2147,7 +2156,7 @@ function activarDroppables(x,y)
                                                           $('.col-6').children()[6].src= y;
                                                           $('.col-7').children()[6].src= ruta;
                                                           movimiento=movimiento+1; //incrementar un movimiento
-                                                          revisarTablero(); }}); //revisar si hay otro trio
+                                                          revisarTablero(6,6,7,6); }}); //revisar si hay otro trio
 
                                                           break;
 
@@ -2346,6 +2355,7 @@ function timer1(){
   {
     correrTimer = false;
     $('.panel-tablero').slideUp(1000);
+    $('.time').slideUp(1000);
     $('.panel-score').width(1000);
   }
   }
